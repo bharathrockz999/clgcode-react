@@ -1,0 +1,51 @@
+/* About.css */
+
+.about-container {
+    text-align: center;
+    padding: 20px;
+    padding-top: 130px; 
+  }
+  
+  .large-image {
+    max-width: 950px;
+    max-height: 550px;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  
+  .about-text {
+    font-size: 17px;
+    margin: 35px 0;
+    line-height: 1.6;
+    font-family: Arial, sans-serif; 
+  }
+  .developers-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  .developers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .developer {
+    text-align: center;
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  
+  
+  .developer-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  
+  .developer p {
+    margin-top: 10px;
+    font-weight: bold;
+  }

@@ -1,0 +1,154 @@
+/* FeedPage.css */
+
+.feeds-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px;
+  padding-top: 130px;
+}
+
+.feed-card {
+  width: calc(100% - 40px);
+  background-color: #edebeb;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.feed-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feed-card h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #007bff;
+}
+
+.feed-card p {
+  font-size: 1rem;
+  margin: 10px 0;
+  position: relative;
+}
+
+.interaction {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.interaction-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.interaction-button:hover {
+  background-color: #0056b3;
+}
+
+.comments-section {
+  margin-top: 10px;
+}
+
+.comment {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.comments-section button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.comments-section button:hover {
+  background-color: #0056b3;
+}
+
+.hidden-description {
+  display: none;
+  margin-top: 10px;
+}
+
+.post-created-date {
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  background-color: #eee;
+  color: #000000;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 16px;  
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+ 
+.search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+ 
+.search-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 10px;
+} 
+
+.search-button:hover {
+  background-color: #0056b3;
+}
