@@ -1,85 +1,187 @@
-// src/components/Navbar.js
 
-import React,{useEffect, useState} from 'react';
-import { Redirect,Link, useHistory } from 'react-router-dom';
-import './Navbar.css';
-import logoImage from './logo2.png';  
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import logoImage from './logo2.png';
 import { useAuth } from '../AuthContext';
-import { checkAuthentication } from './auth';
+import Signin from './Signin';
+import Signup from './Signup';
+import './Navbar.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JavaScript
 
 const Navbar = () => {
   const { authState, dispatch } = useAuth();
   const history = useHistory();
   const isAuthenticated = authState.isAuthenticated;
-  const [showMenu, setShowMenu] = useState(false);
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [showSignupPopup, setShowSignupPopup] = useState(false);
+
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
     localStorage.removeItem('authToken');
-    history.push('/signin');
-    // window.location.reload();
+    history.push('/#');
   };
+
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/feedspage'); 
+      history.push('/feedspage');
+      setShowLoginPopup(false);
+      setShowSignupPopup(false);
     }
   }, [isAuthenticated, history]);
+
+  const openLoginPopup = () => {
+    setShowLoginPopup(true);
+  };
+
+  const closeLoginPopup = () => {
+    setShowLoginPopup(false);
+  };
+
+  const openSignupPopup = () => {
+    setShowSignupPopup(true);
+  };
+
+  const closeSignupPopup = () => {
+    setShowSignupPopup(false);
+  };
+  const closePopupStyle = {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    cursor: 'pointer',
+    width: '36px',
+    height: '36px',
+    backgroundColor: 'transparent',
+    border: 'none',
+    padding: '0',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '24px',
+    color: '#f44336', // Red color for the close icon
+    transition: 'color 0.3s ease',
+  };
   
+  const closePopupHoverStyle = {
+    color: '#d32f2f', // Darker red color on hover
+  };
+
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <img src={logoImage} alt="Your Logo" />
-        <h1 className="logo-title">Professional Based Learning</h1>
-      </div>
-      <div className={`nav-links ${showMenu ? 'show-menu' : ''}`}>
-        <ul>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          
-          {isAuthenticated ? (
-            <>
-              <li>
-                <Link to="/feedspage">Feeds</Link>
+    <>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            <img
+              src={logoImage}
+              alt="Your Logo"
+              className="logo-img"
+            />
+            <span className="logo-title">Professional Based Learning</span>
+          </Link>
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/#">
+                  Home
+                </Link>
               </li>
-              {/* <li>
-                <Link to="/postProject">Post Your Project</Link>
-              </li> */}
-              <li>
-                <Link to="/profile">Profile</Link>
+              <li className="nav-item">
+                <Link className="nav-link" to="/about">
+                  About
+                </Link>
               </li>
-              <li>
-                <Link to="/statistics">Statistics</Link>
-              </li>
-              <li>
-                <Link to="/notifications">Notifications</Link>
-              </li>
-              <li>
-                <button onClick={handleLogout} className="sign-out-button">
-                  Sign Out
-                </button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/signin">Sign In</Link>
-              </li>
-              <li>
-                <Link to="/signup">Sign Up</Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
-    </nav>
+
+              {isAuthenticated ? (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/feedspage">
+                      Feeds
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/profile">
+                      Profile
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/statistics">
+                      Statistics
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/notifications">
+                      Notifications
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <button onClick={handleLogout} className="btn btn-danger">
+                      Sign Out
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <button
+                      onClick={openLoginPopup}
+                      className="nav-link"
+                    >
+                      Login
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      onClick={openSignupPopup}
+                      className="nav-link"
+                    >
+                      Signup
+                    </button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {showLoginPopup && (
+        <div className="popup-container">
+          <div className="popup">
+            <span style={closePopupStyle} onClick={closeLoginPopup}>
+              &times;
+            </span>
+            {/* Include the Signin component */}
+            <Signin closePopup={closeLoginPopup} />
+          </div>
+        </div>
+      )}
+
+      {showSignupPopup && (
+        <div className="popup-container">
+          <div className="popup">
+            <span style={closePopupStyle} onClick={closeSignupPopup}>
+              &times;
+            </span>
+            <Signup closePopup={closeSignupPopup} />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
 export default Navbar;
-
